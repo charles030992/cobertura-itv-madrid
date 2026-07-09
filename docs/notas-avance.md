@@ -60,3 +60,27 @@ Clasificación por 4 categorías, aplicada como "Tipos (símbolos únicos)":
 | > 60 dias | ≥ 60 días | 3 | Verde |
 
 Mapa guardado como "Semáforo ITV - Flota LICUAS (prueba)".
+
+## 2026-07-09 — Buffer bloqueado por permisos, alternativa Popup
+
+### Bloqueo: análisis de cobertura vía Arcade en Estilos
+
+Intentado: calcular distancia mínima a estación ITV usando
+FeatureSetByPortalItem dentro de una expresión de Simbología, para
+colorear zonas_industriales por cobertura sin usar la herramienta de
+Análisis (bloqueada por tipo de usuario, ver nota anterior).
+
+Resultado: no funciona. Las funciones FeatureSet (incluida
+FeatureSetByPortalItem) no están permitidas en el perfil de
+Visualización/Estilos — solo en perfiles que se ejecutan una vez por
+evento (Popup, Field Calculate), no en los que se repintan miles de
+veces al hacer zoom/pan. Es una restricción de arquitectura de Arcade,
+no un bug.
+
+Alternativa viable en el mismo perfil: sí funciona en Popup — se puede
+mostrar la distancia/cobertura como texto al hacer clic en cada zona,
+pero no como color de simbología.
+
+Pendiente: resolver cobertura real vía buffer con ArcGIS API for
+Python (Claude Code), igual que el desbloqueo de OAuth en el otro
+proyecto.
