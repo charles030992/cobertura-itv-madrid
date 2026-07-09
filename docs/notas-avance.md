@@ -101,3 +101,14 @@ más fiables que esta aproximación por distancia.
 Idea de evolución futura del proyecto (no en el alcance del concurso):
 añadir variables adicionales de flota (repostaje, mantenimiento) para
 enriquecer el análisis más allá de solo ITV.
+
+## 2026-07-09 (tarde) — Preparación OAuth para el buffer
+
+- Registrada aplicación OAuth tipo "Otra aplicación" en el portal
+  (charlesjedi.maps.arcgis.com), con Redirect URI
+  urn:ietf:wg:oauth:2.0:oob.
+- Creado `.env` local (no versionado) con ARCGIS_CLIENT_ID y ARCGIS_URL,
+  y `.gitignore` para protegerlo.
+- Pendiente: escribir el script Python que hace el login OAuth
+  interactivo por navegador y calcula el buffer de 15 km sobre
+  estaciones_itv.
