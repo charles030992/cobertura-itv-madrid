@@ -84,3 +84,20 @@ pero no como color de simbología.
 Pendiente: resolver cobertura real vía buffer con ArcGIS API for
 Python (Claude Code), igual que el desbloqueo de OAuth en el otro
 proyecto.
+
+### Resultado (con distancia aproximada vía Popup)
+
+Con radio de 15 km, las 8 zonas industriales salen clasificadas como
+"Cubierta" — no hay ningún hallazgo de falta de cobertura con este
+dataset y este radio. Es un resultado esperado: las zonas de prueba
+se generaron cerca de municipios con estación ITV.
+
+Decisión: no forzar el resultado ahora. Para generar un hallazgo real,
+hay dos vías pendientes de evaluar más adelante — bajar el radio, o
+añadir zonas industriales ficticias más dispersas. Se decide cuando
+el buffer geométrico real (vía Claude Code) esté resuelto, con datos
+más fiables que esta aproximación por distancia.
+
+Idea de evolución futura del proyecto (no en el alcance del concurso):
+añadir variables adicionales de flota (repostaje, mantenimiento) para
+enriquecer el análisis más allá de solo ITV.
