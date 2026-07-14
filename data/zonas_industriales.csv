@@ -1,13 +1,13 @@
-nombre_zona,municipio,latitud,longitud
-Poli­gono Industrial San Marcos,Getafe,40.312,-3.705
-Poligono Industrial Urtinsa,Alcorcon,40.33,-3.85
-Poi­gono Industrial Europolis,Torrejon de Ardoz,40.465,-3.49
-Poli­gono Industrial Loranca,Fuenlabrada,40.295,-3.81
-Poli­gono Industrial El Nogal,Mostoles,40.305,-3.885
-Poli­gono Industrial Vicalvaro,Madrid,40.403,-3.6
-Poli­gono Industrial Ambroz,Coslada,40.43,-3.545
-Poli­gono Industrial Ferrocarril,Alcala de Henares,40.47,-3.38
-Polígono Industrial Aranjuez,Aranjuez,40.0333,-3.6033
-Polígono Industrial Colmenar,Colmenar Viejo,40.6600,-3.7675
-Polígono Industrial Arganda,Arganda del Rey,40.3016,-3.4372
-Polígono Industrial San Martín,San Martín de la Vega,40.1975,-3.5825
+nombre_zona,municipio,latitud,longitud,distancia_km
+Poli­gono Industrial San Marcos,Getafe,40.312,-3.705,3
+Poligono Industrial Urtinsa,Alcorcon,40.33,-3.85,2.7
+Poi­gono Industrial Europolis,Torrejon de Ardoz,40.465,-3.49,1.8
+Poli­gono Industrial Loranca,Fuenlabrada,40.295,-3.81,2
+Poli­gono Industrial El Nogal,Mostoles,40.305,-3.885,2.8
+Poli­gono Industrial Vicalvaro,Madrid,40.403,-3.6,4.7
+Poli­gono Industrial Ambroz,Coslada,40.43,-3.545,1.8
+Poli­gono Industrial Ferrocarril,Alcala de Henares,40.47,-3.38,2.8
+Poligono Industrial Aranjuez,Aranjuez,40.0333,-3.6033,41.4
+Poligono Industrial Colmenar,Colmenar Viejo,40.6600,-3.7675,41.8
+Poligono Industrial Arganda,Arganda del Rey,40.3016,-3.4372,22.3
+Poligono Industrial San Martín,San Martín de la Vega,40.1975,-3.5825,22.1
