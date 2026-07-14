@@ -27,4 +27,4 @@ estaciones.
    dispersas para generar un hallazgo real (no forzar el resultado antes).
 
 ## Repo
-Clonado en C:\Users\carlo\VStudio\cobertura-itv-madrid
+Clonado en <ruta local>/cobertura-itv-madrid
