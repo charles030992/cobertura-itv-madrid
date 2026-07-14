@@ -112,3 +112,45 @@ enriquecer el análisis más allá de solo ITV.
 - Pendiente: escribir el script Python que hace el login OAuth
   interactivo por navegador y calcula el buffer de 15 km sobre
   estaciones_itv.
+
+  ## 2026-07-14 — Ampliación del dataset y hallazgo de cobertura real
+
+### Problema detectado
+
+Con las 8 zonas industriales originales, todas salían "Cubierta" a
+15 km — resultado esperado pero poco interesante, porque el dataset
+se diseñó con zonas muy cercanas a las estaciones.
+
+### Solución
+
+Se añadieron 4 zonas industriales nuevas, deliberadamente alejadas de
+cualquier estación ITV: Aranjuez, Colmenar Viejo, Arganda del Rey y
+San Martín de la Vega.
+
+### Proceso técnico (lección aprendida)
+
+Editar el CSV en GitHub no actualiza automáticamente la capa en
+ArcGIS Online — son sistemas independientes sin sincronización. Hay
+que descargar el CSV actualizado y usar explícitamente "Actualizar
+datos → Sobrescribir capa de entidades entera" sobre el ítem Feature
+Layer en ArcGIS. "Exportar datos" NO sirve para esto — genera una
+copia de los datos existentes, no permite subir datos nuevos.
+
+### Resultado
+
+Con 12 zonas totales y radio de 15 km:
+- Cubierta: 8 (dataset original)
+- No cubierta: Aranjuez, Arganda del Rey, San Martín de la Vega
+  (Colmenar Viejo pendiente de confirmar, previsiblemente también
+  No cubierta)
+
+Primer hallazgo real del proyecto: zonas industriales al sur/este de
+la región (Aranjuez, Arganda, San Martín) quedan fuera del radio de
+cobertura ITV de 15 km.
+
+### Nuevo requisito detectado (email organización concurso)
+
+CEsri26 valora explícitamente: uso inteligente del dato, integración
+de GEOAI, y análisis apoyado en ArcGIS Living Atlas. GEOAI no está
+cubierto todavía en este proyecto — posible conexión futura con el
+proyecto `arcgis-yolo-infraestructuras` (ya tiene YOLO funcionando).
