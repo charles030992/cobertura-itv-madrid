@@ -34,12 +34,11 @@ concurso Esri "Mapas en Acción" (CEsri26, deadline 20 septiembre 2026).
 
 ## Hallazgo actual
 
-Con un radio de cobertura de 15 km, las 8 zonas industriales del
-dataset de prueba quedan cubiertas por al menos una estación ITV. Es
-un resultado esperado dado el diseño del dataset (zonas creadas cerca
-de municipios con estación ITV); pendiente de revisar con un radio más
-exigente o un dataset más disperso para generar un hallazgo con mayor
-valor analítico.
+Con un radio de cobertura de 15 km y un dataset ampliado a 12 zonas
+industriales, se detectan al menos 3 zonas sin cobertura ITV
+suficiente: Aranjuez, Arganda del Rey y San Martín de la Vega —
+todas al sur/este de la Comunidad de Madrid, alejadas del clúster
+de estaciones concentrado en la zona sur-metropolitana.
 
 ## Limitaciones técnicas conocidas
 
@@ -58,6 +57,8 @@ Detalle completo de decisiones y problemas resueltos en
 
 ## Próximos pasos
 
+0. Explorar integración GEOAI (posible conexión con proyecto
+   arcgis-yolo-infraestructuras) — requisito explícito del concurso
 1. Resolver buffer geométrico real vía ArcGIS API for Python (en curso)
 2. Decidir radio de cobertura definitivo con datos de buffer real
 3. Resolver compartición pública de las capas restantes
