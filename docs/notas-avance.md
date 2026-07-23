@@ -223,3 +223,86 @@ Consumir capas ya generadas mediante GeoAI y publicadas en Living Atlas (p. ej. 
 Reserva honesta sobre esta opción: las capas globales de land cover tienen resolución media (~10 m) y solo distinguen "área construida" genérica — no diferencian suelo industrial de residencial. Como respaldo de las 12 zonas industriales concretas del proyecto es débil. Encajaría mejor en un análisis distinto ("qué áreas construidas de Madrid quedan fuera de cobertura").
 
 Decisión pendiente: si merece la pena incorporar GEOAI por esta vía o si no encaja de forma honesta en este proyecto.
+
+
+## 2026-07-23 (tarde) — Reorientación del análisis: de cobertura genérica a cobertura de vehículos pesados
+
+### El problema con el planteamiento inicial
+
+El análisis partía de una pregunta que, examinada con datos reales, no
+produce hallazgo: *¿hay estaciones ITV cerca de las zonas industriales
+de Madrid?*
+
+La respuesta es sí, prácticamente en todas partes. La Comunidad de
+Madrid cuenta con unas 70 estaciones ITV distribuidas por todo el
+territorio. Con el dataset ficticio inicial (8 estaciones inventadas)
+aparecían zonas descubiertas, pero ese vacío era un artefacto de los
+datos, no un hecho del territorio. Al sustituir por estaciones reales,
+el hueco desaparece.
+
+Forzar el hallazgo — seleccionando zonas o estaciones para que salga un
+reparto llamativo — habría producido un resultado fabricado. Se
+descartó esa vía.
+
+### La pregunta reformulada
+
+El hallazgo potencial no está en la cobertura genérica, sino en la
+**cobertura para vehículos pesados**.
+
+Camiones, hormigoneras, plataformas y maquinaria de obra no pueden
+inspeccionarse en cualquier estación: requieren línea de pesados, que
+solo una parte de la red ofrece. Para una flota de construcción, la red
+efectiva es por tanto mucho menor que la red nominal.
+
+Tesis del proyecto: *la red ITV de la Comunidad de Madrid es densa para
+turismos, pero significativamente menos densa para maquinaria pesada de
+obra.*
+
+### Consecuencias sobre el modelo de datos
+
+1. **`categorias`** pasa a ser el atributo central de las estaciones, no
+   un campo secundario. Recoge qué tipos de vehículo inspecciona cada
+   estación (ligeros, pesados, maquinaria agrícola, motos). Si el dato
+   no resulta verificable estación por estación, se simplificará a un
+   booleano `admite_pesados`.
+
+2. **Las estaciones pasan a ser reales**, extraídas del listado oficial
+   de la Dirección General de Promoción Económica e Industrial de la
+   Comunidad de Madrid. Selección de 18, una por municipio, cubriendo
+   los ejes radiales (A-1 a A-6, A-42, M-501, M-607) y cuatro coronas
+   (centro, metropolitana, periferia, periferia lejana).
+
+3. **La flota ficticia se redefine vehículo a vehículo**, con predominio
+   de pesados y algunos ligeros. Los ligeros funcionan como grupo de
+   contraste: para ellos hay cobertura en todo el territorio; para los
+   pesados, no necesariamente. Ese contraste es el argumento visual del
+   mapa.
+
+4. **Segundo eje de valor, independiente del hallazgo**: aunque exista
+   cobertura, la asignación óptima sigue importando. La diferencia entre
+   una estación a 8 km y otra a 25 km son horas de máquina parada, no
+   solo combustible.
+
+### Modelo de optimización propuesto
+
+Los vehículos de una flota de construcción no tienen base fija: rotan
+entre zonas industriales siguiendo las obras. La propuesta no consiste
+en generar desplazamientos nuevos, sino en **reordenar los que ya van a
+producirse**: cuando a un vehículo se le acerca la ITV, planificar su
+siguiente rotación hacia una zona bien conectada con una estación apta
+para su categoría.
+
+### Datos excluidos
+
+Las **estaciones ITV móviles** quedan fuera del dataset: son unidades
+itinerantes sin ubicación fija y no admiten geolocalización ni cálculo
+de distancia. Se conservan como argumento en la narrativa — la propia
+administración las despliega precisamente para evitar desplazamientos
+por vía pública de vehículos lentos, que es el mismo problema que aborda
+este proyecto.
+
+### Estado de los datasets
+
+Los CSV anteriores (8 estaciones ficticias, 12 zonas industriales) se
+sobrescriben. El histórico queda en el control de versiones.
+
