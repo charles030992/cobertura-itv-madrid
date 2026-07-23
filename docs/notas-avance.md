@@ -178,3 +178,48 @@ Hallazgo consistente, no un caso aislado: las zonas industriales del sur y este 
 Nuevo requisito del concurso (email organización CEsri26)
 
 La organización comunicó que valoran explícitamente tres criterios: uso inteligente del dato, GEOAI e integración con Living Atlas. GEOAI no estaba cubierto en el proyecto en esta fecha.
+
+2026-07-23 — Smart mapping resuelto y GEOAI bloqueado por licencia
+Smart mapping continuo sobre distancia_km
+
+Objetivo: colorear las zonas industriales por distancia a la estación ITV más cercana (cerca = verde, lejos = rojo), cumpliendo el criterio de smart mapping que valora la organización.
+
+Problema inicial: el resultado salía invertido (zonas lejanas en verde) y la capa mostraba el icono estático de fábrica en lugar del gradiente.
+
+Causa y solución: el estilo continuo sustituye el símbolo por círculos coloreados — no es posible mantener el icono de fábrica y el gradiente a la vez. La inversión se corrigió invirtiendo la rampa de color desde Opciones de estilo.
+
+Confusión a evitar: una vez añadido distancia_km con "+ Campo", ese campo desaparece de la lista de atributos disponibles, porque la lista solo muestra los que aún no están asignados. No es un error ni una capa equivocada; es el comportamiento normal de Map Viewer. Para modificar el estilo ya aplicado hay que entrar por Opciones de estilo, no por "+ Campo".
+
+Legibilidad: colisión entre vehículos y zonas
+
+Al pasar las zonas a símbolos redondos, chocaban visualmente con los pines de vehículos. Decisión: los vehículos son los protagonistas (el mapa trata de la flota); las zonas quedan como capa de contexto. Aplicado contorno negro a las zonas para delimitarlas. Los retoques finos (tamaño, transparencia, basemap con menos etiquetas, encuadre) se dejan para la fase final de diseño.
+
+Observación pendiente para esa fase: aparecen etiquetas de municipios ajenos al análisis (Toledo, Tarancón). No son datos del proyecto, son etiquetas del mapa base, pero pueden inducir a error a quien vea el mapa. Se resuelve con encuadre y/o un basemap más neutro.
+
+Bloqueo confirmado: GEOAI no ejecutable con esta licencia
+
+Verificado en el panel de Licencias de la organización. El tipo de usuario Location Platform Owner incluye únicamente:
+
+Map Viewer
+Organization Website
+Scene Viewer
+Native Maps SDK Lite
+
+No incluye ArcGIS Image, Image Analyst ni ninguna extensión de análisis ráster. Consecuencias:
+
+Ejecutar modelos GeoAI preentrenados (.dlpk) sobre imagen queda descartado — requiere ArcGIS Image y una organización configurada para raster analytics.
+La vía de foundation models / location embeddings + AutoML queda también descartada — requiere ArcGIS Pro con licencia Advanced.
+
+No es un problema de configuración ni de permisos ocultos: esas capacidades sencillamente no están incluidas en el tipo de usuario.
+
+Descarte del YOLO como vía GEOAI
+
+El modelo YOLO del proyecto arcgis-yolo-infraestructuras está preentrenado sobre COCO (80 clases de objetos cotidianos). Es un detector de objetos de fotografía convencional, no un modelo geoespacial. Forzar su encaje con un análisis de cobertura ITV sería artificial. Se aparca como vía para este proyecto.
+
+Vía que queda abierta (sin decidir)
+
+Consumir capas ya generadas mediante GeoAI y publicadas en Living Atlas (p. ej. clasificación global de cobertura de suelo), que se añaden como feature layer normal y no requieren extensión.
+
+Reserva honesta sobre esta opción: las capas globales de land cover tienen resolución media (~10 m) y solo distinguen "área construida" genérica — no diferencian suelo industrial de residencial. Como respaldo de las 12 zonas industriales concretas del proyecto es débil. Encajaría mejor en un análisis distinto ("qué áreas construidas de Madrid quedan fuera de cobertura").
+
+Decisión pendiente: si merece la pena incorporar GEOAI por esta vía o si no encaja de forma honesta en este proyecto.
